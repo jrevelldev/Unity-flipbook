@@ -286,6 +286,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 180032, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1346331179}
+    - targetCorrespondingSourceObject: {fileID: 180032, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1346331181}
   m_SourcePrefab: {fileID: 100100000, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
 --- !u!850595691 &403556852
 LightingSettings:
@@ -465,6 +468,20 @@ MonoBehaviour:
   hoverColor: {r: 0.2, g: 0.2, b: 0.2, a: 0.8}
   arrowColor: {r: 1, g: 1, b: 1, a: 1}
   fontSize: 48
+--- !u!114 &1346331181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804881200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b5c5fcbae8141e28de5074aaace558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BookZoom
+  zoomScale: 2
+  zoomSpeed: 15
 --- !u!1 &1591634589
 GameObject:
   m_ObjectHideFlags: 0

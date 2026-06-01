@@ -86,6 +86,11 @@ public class Book : MonoBehaviour {
             }
         }
 
+        if (GetComponent<BookZoom>() == null)
+        {
+            gameObject.AddComponent<BookZoom>();
+        }
+
         float pageWidth = BookPanel.rect.width / 2.0f;
         float pageHeight = BookPanel.rect.height;
         NextPageClip.rectTransform.sizeDelta = new Vector2(pageWidth, pageHeight + pageHeight * 2);

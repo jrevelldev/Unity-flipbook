@@ -3,7 +3,7 @@ using System.Collections;
 [RequireComponent(typeof(Book))]
 public class AutoFlip : MonoBehaviour {
     public FlipMode Mode;
-    public float PageFlipTime = 1;
+    public float PageFlipTime = 0.5f;
     public float TimeBetweenPages = 1;
     public float DelayBeforeStarting = 0;
     public bool AutoStartFlip=true;

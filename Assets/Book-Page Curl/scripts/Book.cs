@@ -1,4 +1,4 @@
-﻿//The implementation is based on this article:http://rbarraza.com/html5-canvas-pageflip/
+//The implementation is based on this article:http://rbarraza.com/html5-canvas-pageflip/
 //As the rbarraza.com website is not live anymore you can get an archived version from web archive 
 //or check an archived version that I uploaded on my website: https://dandarawy.com/html5-canvas-pageflip/
 
@@ -289,15 +289,15 @@ public class Book : MonoBehaviour {
         Left.rectTransform.pivot = new Vector2(0, 0);
         Left.transform.position = RightNext.transform.position;
         Left.transform.eulerAngles = new Vector3(0, 0, 0);
-        Left.sprite = (currentPage < bookPages.Length) ? bookPages[currentPage] : background;
+        UpdatePageImage(Left, (currentPage < bookPages.Length) ? bookPages[currentPage] : background);
         Left.transform.SetAsFirstSibling();
         
         Right.gameObject.SetActive(true);
         Right.transform.position = RightNext.transform.position;
         Right.transform.eulerAngles = new Vector3(0, 0, 0);
-        Right.sprite = (currentPage < bookPages.Length - 1) ? bookPages[currentPage + 1] : background;
+        UpdatePageImage(Right, (currentPage < bookPages.Length - 1) ? bookPages[currentPage + 1] : background);
 
-        RightNext.sprite = (currentPage < bookPages.Length - 2) ? bookPages[currentPage + 2] : background;
+        UpdatePageImage(RightNext, (currentPage < bookPages.Length - 2) ? bookPages[currentPage + 2] : background);
 
         LeftNext.transform.SetAsFirstSibling();
         if (enableShadowEffect) Shadow.gameObject.SetActive(true);
@@ -321,7 +321,7 @@ public class Book : MonoBehaviour {
 
         Right.gameObject.SetActive(true);
         Right.transform.position = LeftNext.transform.position;
-        Right.sprite = bookPages[currentPage - 1];
+        UpdatePageImage(Right, bookPages[currentPage - 1]);
         Right.transform.eulerAngles = new Vector3(0, 0, 0);
         Right.transform.SetAsFirstSibling();
 
@@ -329,9 +329,9 @@ public class Book : MonoBehaviour {
         Left.rectTransform.pivot = new Vector2(1, 0);
         Left.transform.position = LeftNext.transform.position;
         Left.transform.eulerAngles = new Vector3(0, 0, 0);
-        Left.sprite = (currentPage >= 2) ? bookPages[currentPage - 2] : background;
+        UpdatePageImage(Left, (currentPage >= 2) ? bookPages[currentPage - 2] : background);
 
-        LeftNext.sprite = (currentPage >= 3) ? bookPages[currentPage - 3] : background;
+        UpdatePageImage(LeftNext, (currentPage >= 3) ? bookPages[currentPage - 3] : background);
 
         RightNext.transform.SetAsFirstSibling();
         if (enableShadowEffect) ShadowLTR.gameObject.SetActive(true);
@@ -366,8 +366,8 @@ public class Book : MonoBehaviour {
     Coroutine currentCoroutine;
     void UpdateSprites()
     {
-        LeftNext.sprite= (currentPage > 0 && currentPage <= bookPages.Length) ? bookPages[currentPage-1] : background;
-        RightNext.sprite=(currentPage>=0 &&currentPage<bookPages.Length) ? bookPages[currentPage] : background;
+        UpdatePageImage(LeftNext, (currentPage > 0 && currentPage <= bookPages.Length) ? bookPages[currentPage-1] : background);
+        UpdatePageImage(RightNext, (currentPage>=0 &&currentPage<bookPages.Length) ? bookPages[currentPage] : background);
     }
     public void TweenForward()
     {
@@ -444,5 +444,13 @@ public class Book : MonoBehaviour {
         }
         if (onFinish != null)
             onFinish();
+    }
+    private void UpdatePageImage(Image image, Sprite sprite)
+    {
+        if (image != null)
+        {
+            image.sprite = sprite;
+            image.enabled = (sprite != null);
+        }
     }
 }

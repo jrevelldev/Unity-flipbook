@@ -22,6 +22,7 @@ public class Book : MonoBehaviour {
     public bool enableShadowEffect=true;
     //represent the index of the sprite shown in the right page
     public int currentPage = 0;
+    public bool showNavigationButtons = true;
     public int TotalPageCount
     {
         get { return bookPages.Length; }
@@ -76,6 +77,14 @@ public class Book : MonoBehaviour {
         Right.gameObject.SetActive(false);
         UpdateSprites();
         CalcCurlCriticalPoints();
+
+        if (showNavigationButtons)
+        {
+            if (GetComponent<BookNavigation>() == null)
+            {
+                gameObject.AddComponent<BookNavigation>();
+            }
+        }
 
         float pageWidth = BookPanel.rect.width / 2.0f;
         float pageHeight = BookPanel.rect.height;

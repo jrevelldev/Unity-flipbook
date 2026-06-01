@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 [RequireComponent(typeof(Book))]
 public class AutoFlip : MonoBehaviour {
@@ -21,6 +21,10 @@ public class AutoFlip : MonoBehaviour {
     void PageFlipped()
     {
         isFlipping = false;
+        if (ControledBook)
+        {
+            ControledBook.interactable = true;
+        }
     }
 	public void StartFlipping()
     {
@@ -29,6 +33,7 @@ public class AutoFlip : MonoBehaviour {
     public void FlipRightPage()
     {
         if (isFlipping) return;
+        if (!ControledBook.interactable) return;
         if (ControledBook.currentPage >= ControledBook.TotalPageCount) return;
         isFlipping = true;
         float frameTime = PageFlipTime / AnimationFramesCount;
@@ -42,6 +47,7 @@ public class AutoFlip : MonoBehaviour {
     public void FlipLeftPage()
     {
         if (isFlipping) return;
+        if (!ControledBook.interactable) return;
         if (ControledBook.currentPage <= 0) return;
         isFlipping = true;
         float frameTime = PageFlipTime / AnimationFramesCount;
@@ -95,6 +101,7 @@ public class AutoFlip : MonoBehaviour {
     }
     IEnumerator FlipRTL(float xc, float xl, float h, float frameTime, float dx)
     {
+        ControledBook.interactable = false;
         float x = xc + xl;
         float y = (-h / (xl * xl)) * (x - xc) * (x - xc);
 
@@ -110,6 +117,7 @@ public class AutoFlip : MonoBehaviour {
     }
     IEnumerator FlipLTR(float xc, float xl, float h, float frameTime, float dx)
     {
+        ControledBook.interactable = false;
         float x = xc - xl;
         float y = (-h / (xl * xl)) * (x - xc) * (x - xc);
         ControledBook.DragLeftPageToPoint(new Vector3(x, y, 0));
